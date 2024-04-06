@@ -12,7 +12,6 @@ class TestLoginView(APIView):
 
 
 class ActivateUser(UserViewSet):
-
     def get_serializer(self, *args, **kwargs):
         serializer_class = self.get_serializer_class()
         kwargs.setdefault('context', self.get_serializer_context())
@@ -21,4 +20,5 @@ class ActivateUser(UserViewSet):
             'uid': self.kwargs['uid'],
             'token': self.kwargs['token']
         }
+
         return serializer_class(*args, **kwargs)
