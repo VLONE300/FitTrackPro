@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'users.apps.UsersConfig',
     'workouts.apps.WorkoutsConfig',
+    'trainers.apps.TrainersConfig',
 ]
 
 MIDDLEWARE = [
