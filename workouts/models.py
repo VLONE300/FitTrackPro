@@ -3,20 +3,6 @@ from django.db import models
 from users.models import CustomUser
 
 
-class TrainingProgram(models.Model):
-    TRAINING_TYPE = (
-        ('Personal', 'Personal'),
-        ('General ', 'General ')
-    )
-
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    training_type = models.CharField(max_length=10, choices=TRAINING_TYPE)
-
-    def __str__(self):
-        return self.name
-
-
 class Exercise(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -26,13 +12,27 @@ class Exercise(models.Model):
 
 
 class TrainingExercise(models.Model):
-    training_program = models.ForeignKey(TrainingProgram, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     sets = models.PositiveIntegerField()
     reps = models.PositiveIntegerField()
 
     def __str__(self):
         return f'{self.exercise.name} - {self.sets} sets - {self.reps} reps'
+
+
+class TrainingProgram(models.Model):
+    TRAINING_TYPE = (
+        ('Personal', 'Personal'),
+        ('General ', 'General ')
+    )
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    training_type = models.CharField(max_length=10, choices=TRAINING_TYPE)
+    exercises = models.ManyToManyField(TrainingExercise)
+
+    def __str__(self):
+        return self.name
 
 
 class ExerciseResult(models.Model):
