@@ -1,13 +1,14 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from workouts.models import Exercise, TrainingExercise, TrainingProgram
 from workouts.serializers import ExerciseSerializer, TrainingExerciseSerializer, TrainingProgramSerializer
 
 
 class ExerciseViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
     filter_backends = [SearchFilter]
@@ -15,6 +16,7 @@ class ExerciseViewSet(viewsets.ModelViewSet):
 
 
 class TrainingExerciseViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = TrainingExercise.objects.all()
     serializer_class = TrainingExerciseSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter]
