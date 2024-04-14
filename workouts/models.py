@@ -23,7 +23,7 @@ class TrainingExercise(models.Model):
 class TrainingProgram(models.Model):
     TRAINING_TYPE = (
         ('Personal', 'Personal'),
-        ('General ', 'General ')
+        ('General', 'General')
     )
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
