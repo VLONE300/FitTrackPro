@@ -2,6 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.views import APIView
 
 from workouts.models import Exercise, TrainingExercise, TrainingProgram
 from workouts.serializers import ExerciseSerializer, TrainingExerciseSerializer, TrainingProgramSerializer
@@ -25,8 +26,8 @@ class TrainingExerciseViewSet(viewsets.ModelViewSet):
 
 
 class TrainingProgramViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
-    queryset = TrainingProgram.objects.filter(training_type='General ')
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    queryset = TrainingProgram.objects.filter(training_type='General')
     serializer_class = TrainingProgramSerializer
 
     def perform_create(self, serializer):

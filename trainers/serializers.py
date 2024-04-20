@@ -11,11 +11,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
 
 class TrainerSerializer(serializers.ModelSerializer):
-    user = CustomUserSerializer()
 
     class Meta:
         model = Trainer
-        fields = ('user', 'contacts', 'work_experience')
+        fields = ('first_name', 'last_name', 'contacts', 'work_experience')
 
 
 class TrainersProgramSerializer(serializers.ModelSerializer):

@@ -39,10 +39,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return f'{self.first_name} {self.last_name}'
 
 
-class Trainer(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
+class Trainer(CustomUser):
     contacts = models.CharField(max_length=50, blank=True, null=True, default=None)
     work_experience = models.PositiveIntegerField()
-
-    def __str__(self):
-        return f'{self.user}'
