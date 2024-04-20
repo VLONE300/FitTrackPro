@@ -31,3 +31,9 @@ class TrainingProgramSerializer(serializers.ModelSerializer):
             exercise = TrainingExercise.objects.create(**exercise_data)
             training_program.exercises.add(exercise)
         return training_program
+
+
+class MyProgramSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrainingProgram
+        fields = ('id', 'name', 'description', 'training_type', 'exercises')

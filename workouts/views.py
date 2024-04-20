@@ -5,7 +5,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticate
 from rest_framework.views import APIView
 
 from workouts.models import Exercise, TrainingExercise, TrainingProgram
-from workouts.serializers import ExerciseSerializer, TrainingExerciseSerializer, TrainingProgramSerializer
+from workouts.serializers import ExerciseSerializer, TrainingExerciseSerializer, TrainingProgramSerializer, \
+    MyProgramSerializer
 
 
 class ExerciseViewSet(viewsets.ModelViewSet):
@@ -32,3 +33,12 @@ class TrainingProgramViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class MyProgramViewSet(viewsets.ModelViewSet):
+    serializer_class = MyProgramSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = TrainingProgram.objects.filter(user=self.request.user)
+        return queryset
