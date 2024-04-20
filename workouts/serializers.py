@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from workouts.models import Exercise, TrainingExercise, TrainingProgram
+from workouts.models import Exercise, TrainingExercise, TrainingProgram, ExerciseResult
 
 
 class ExerciseSerializer(serializers.ModelSerializer):
@@ -37,3 +37,9 @@ class MyProgramSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrainingProgram
         fields = ('id', 'name', 'description', 'training_type', 'exercises')
+
+
+class ExerciseResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ExerciseResult
+        fields = ('id', 'training_exercise', 'date', 'sets_completed', 'reps_completed', 'weight_lifted')
