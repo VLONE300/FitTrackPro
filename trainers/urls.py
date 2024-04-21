@@ -1,10 +1,11 @@
 from django.urls import path
 from rest_framework.routers import SimpleRouter
 
-from trainers.views import TrainersListView, TrainersProgramView
+from trainers.views import TrainersListView, TrainersProgramView, UserProgressView
 
 router = SimpleRouter()
 router.register(r'trainers-program', TrainersProgramView)
+router.register(r'user-progress', UserProgressView)
 
 urlpatterns = [
     path('', TrainersListView.as_view(), name='trainers-list')

@@ -41,6 +41,7 @@ class MyProgramViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = TrainingProgram.objects.filter(user=self.request.user)
+        print(hasattr(self.request.user,'trainer'))
         return queryset
 
 
