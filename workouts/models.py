@@ -37,11 +37,11 @@ class TrainingProgram(models.Model):
 
 class ExerciseResult(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='exercise_results')
-    training_exercise = models.ForeignKey(TrainingExercise, on_delete=models.CASCADE)
+    training_exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     date = models.DateField()
     sets_completed = models.PositiveIntegerField()
     reps_completed = models.PositiveIntegerField()
     weight_lifted = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-        return f'{self.training_exercise.exercise} - {self.date}'
+        return f'{self.training_exercise} - {self.date}'

@@ -1,13 +1,13 @@
-from requests import Response
 from rest_framework import status
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from trainers.models import UserTrainingProgram
+from trainers.models import UserTrainingProgram, UserProgress
 from trainers.permissions import IsTrainer, IsTrainerOfTrainingProgram
-from trainers.serializers import TrainerSerializer, TrainersProgramSerializer
-from users.models import Trainer, CustomUser
+from trainers.serializers import TrainerSerializer, TrainersProgramSerializer, UserProgressSerializer
+from users.models import Trainer
 
 
 class TrainersListView(ListAPIView):
@@ -23,7 +23,7 @@ class TrainersProgramView(ModelViewSet):
 
     def perform_create(self, serializer):
         user = self.request.user
-        trainer = Trainer.objects.get(user=user)
+        trainer = Trainer.objects.get(email=user.email)
         serializer.save(trainer=trainer)
 
     def get_permissions(self):
@@ -32,3 +32,9 @@ class TrainersProgramView(ModelViewSet):
         else:
             permissions_classes = [IsAuthenticated, IsTrainer]
         return [permission() for permission in permissions_classes]
+
+
+class UserProgressView(ModelViewSet):
+    queryset = UserProgress.objects.all()
+    serializer_class = UserProgressSerializer
+    permission_classes = [IsTrainer]
