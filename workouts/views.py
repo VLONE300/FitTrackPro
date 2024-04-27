@@ -1,8 +1,6 @@
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from workouts.models import Exercise, TrainingExercise, TrainingProgram, ExerciseResult
 from workouts.serializers import ExerciseSerializer, TrainingExerciseSerializer, TrainingProgramSerializer, \
@@ -21,7 +19,7 @@ class TrainingExerciseViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = TrainingExercise.objects.all()
     serializer_class = TrainingExerciseSerializer
-    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filter_backends = [OrderingFilter]
     filterset_fields = ['sets']
     ordering_fields = ['sets']
 
@@ -41,7 +39,7 @@ class MyProgramViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = TrainingProgram.objects.filter(user=self.request.user)
-        print(hasattr(self.request.user,'trainer'))
+        print(hasattr(self.request.user, 'trainer'))
         return queryset
 
 
