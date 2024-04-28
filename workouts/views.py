@@ -33,6 +33,7 @@ class TrainingProgramViewSet(viewsets.ModelViewSet):
         user = self.request.user
         serializer.save(user=user)
 
+
 class MyProgramViewSet(viewsets.ModelViewSet):
     serializer_class = MyProgramSerializer
     permission_classes = [IsAuthenticated]
