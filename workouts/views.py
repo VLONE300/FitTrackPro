@@ -32,7 +32,6 @@ class TrainingProgramViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         user = self.request.user
         serializer.save(user=user)
-        send_create_program_mail.delay(user.email)
 
 class MyProgramViewSet(viewsets.ModelViewSet):
     serializer_class = MyProgramSerializer
