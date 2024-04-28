@@ -29,9 +29,6 @@ class TrainingProgramViewSet(viewsets.ModelViewSet):
     queryset = TrainingProgram.objects.filter(training_type='General')
     serializer_class = TrainingProgramSerializer
 
-    def perform_create(self, serializer):
-        user = self.request.user
-        serializer.save(user=user)
 
 
 class MyProgramViewSet(viewsets.ModelViewSet):
