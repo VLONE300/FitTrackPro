@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from workouts.models import Exercise, TrainingExercise, TrainingProgram, ExerciseResult
 from workouts.serializers import ExerciseSerializer, TrainingExerciseSerializer, TrainingProgramSerializer, \
     MyProgramSerializer, ExerciseResultSerializer
+from workouts.tasks import send_create_program_email
 
 
 class ExerciseViewSet(viewsets.ModelViewSet):
@@ -30,7 +31,8 @@ class TrainingProgramViewSet(viewsets.ModelViewSet):
     serializer_class = TrainingProgramSerializer
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        user = self.request.user
+        serializer.save(user=user)
 
 
 class MyProgramViewSet(viewsets.ModelViewSet):

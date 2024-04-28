@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'workouts.apps.WorkoutsConfig',
     'trainers.apps.TrainersConfig',
-    'django_celery_beat',
 
 ]
 
