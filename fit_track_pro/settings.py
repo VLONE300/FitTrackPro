@@ -192,3 +192,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = f'redis://{env("CELERY_HOST")}:{env("CELERY_PORT")}'
+CELERY_RESULT_BACKEND = f'redis://{env("CELERY_HOST")}:{env("CELERY_PORT")}'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
