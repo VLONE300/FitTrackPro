@@ -5,7 +5,6 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from workouts.models import Exercise, TrainingExercise, TrainingProgram, ExerciseResult
 from workouts.serializers import ExerciseSerializer, TrainingExerciseSerializer, TrainingProgramSerializer, \
     MyProgramSerializer, ExerciseResultSerializer
-from workouts.tasks import send_create_program_email
 
 
 class ExerciseViewSet(viewsets.ModelViewSet):
